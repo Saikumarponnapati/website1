@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add some padding for smaller screens */
+            box-sizing: border-box;
+        }
+
+        /* Custom styles for smoother transitions */
+        .form-container {
+            transition: transform 0.5s ease-in-out;
+        }
+        .form-hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            position: absolute; /* Hide without affecting layout */
+            pointer-events: none; /* Disable interactions */
+        }
+        .form-visible {
+            transform: translateX(0);
+            opacity: 1;
+            position: static; /* Restore normal layout flow */
+            pointer-events: auto; /* Enable interactions */
+        }
+
+        /* Specific for signup form to move left */
+        #signup-form.form-hidden {
+            transform: translateX(-100%);
+        }
+
+        /* Ensure the forms overlap correctly for the transition */
+        .form-wrapper {
+            position: relative;
+            width: 100%;
+            height: auto; /* Adjust height based on content */
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-200 selection:text-blue-900">
+    <div class="relative w-full max-w-md bg-white rounded-xl shadow-2xl p-8 md:p-10 border border-gray-200">
+        <!-- Toggle Buttons -->
+        <div class="flex justify-center mb-8">
+            <button id="show-login-btn"
+                    class="py-2 px-6 rounded-l-lg text-lg font-semibold transition-all duration-300 ease-in-out
+                           bg-blue-600 text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Login
+            </button>
+            <button id="show-signup-btn"
+                    class="py-2 px-6 rounded-r-lg text-lg font-semibold transition-all duration-300 ease-in-out
+                           bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Sign Up
+            </button>
+        </div>
+
+        <div class="form-wrapper overflow-hidden">
+            <!-- Login Form -->
+            <form id="login-form" class="form-container form-visible">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Welcome Back!</h2>
+
+                <div class="mb-5">
+                    <label for="login-email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" id="login-email" name="email" placeholder="you@example.com" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                </div>
+
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="login-password" name="password" placeholder="••••••••" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                    <a href="#" class="text-sm text-blue-600 hover:text-blue-700 float-right mt-1">Forgot Password?</a>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                    Login
+                </button>
+
+                <p class="text-center text-gray-600 text-sm mt-6">
+                    Don't have an account?
+                    <button type="button" id="switch-to-signup-from-login" class="text-blue-600 hover:text-blue-700 font-medium">Sign up here</button>
+                </p>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="form-container form-hidden">
+                <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Create Your Account</h2>
+
+                <div class="mb-5">
+                    <label for="signup-name" class="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
+                    <input type="text" id="signup-name" name="name" placeholder="John Doe" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                </div>
+
+                <div class="mb-5">
+                    <label for="signup-email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
+                    <input type="email" id="signup-email" name="email" placeholder="you@example.com" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                </div>
+
+                <div class="mb-5">
+                    <label for="signup-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="signup-password" name="password" placeholder="••••••••" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                </div>
+
+                <div class="mb-6">
+                    <label for="signup-confirm-password" class="block text-gray-700 text-sm font-medium mb-2">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm-password" placeholder="••••••••" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ease-in-out">
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 ease-in-out shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75">
+                    Sign Up
+                </button>
+
+                <p class="text-center text-gray-600 text-sm mt-6">
+                    Already have an account?
+                    <button type="button" id="switch-to-login-from-signup" class="text-blue-600 hover:text-blue-700 font-medium">Login here</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const showLoginBtn = document.getElementById('show-login-btn');
+        const showSignupBtn = document.getElementById('show-signup-btn');
+        const switchToSignupBtn = document.getElementById('switch-to-signup-from-login');
+        const switchToLoginBtn = document.getElementById('switch-to-login-from-signup');
+
+        // Function to toggle forms
+        function showForm(formToShow) {
+            if (formToShow === 'login') {
+                loginForm.classList.remove('form-hidden');
+                loginForm.classList.add('form-visible');
+                signupForm.classList.remove('form-visible');
+                signupForm.classList.add('form-hidden');
+
+                showLoginBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+                showLoginBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                showSignupBtn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                showSignupBtn.classList.add('bg-gray-200', 'text-gray-700');
+            } else { // formToShow === 'signup'
+                signupForm.classList.remove('form-hidden');
+                signupForm.classList.add('form-visible');
+                loginForm.classList.remove('form-visible');
+                loginForm.classList.add('form-hidden');
+
+                showSignupBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+                showSignupBtn.classList.remove('bg-gray-200', 'text-gray-700');
+                showLoginBtn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+                showLoginBtn.classList.add('bg-gray-200', 'text-gray-700');
+            }
+        }
+
+        // Event Listeners for the toggle buttons
+        showLoginBtn.addEventListener('click', () => showForm('login'));
+        showSignupBtn.addEventListener('click', () => showForm('signup'));
+
+        // Event Listeners for inline switch buttons
+        switchToSignupBtn.addEventListener('click', () => showForm('signup'));
+        switchToLoginBtn.addEventListener('click', () => showForm('login'));
+
+        // Prevent default form submission for demonstration purposes
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Login form submitted!');
+            // In a real application, you would send this data to a server
+            // For example, display a message instead of an alert
+            const email = document.getElementById('login-email').value;
+            const messageBox = document.createElement('div');
+            messageBox.className = "fixed top-0 left-1/2 -translate-x-1/2 mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg z-50 transition-opacity duration-300 opacity-100";
+            messageBox.textContent = `Login attempt for: ${email}`;
+            document.body.appendChild(messageBox);
+            setTimeout(() => {
+                messageBox.classList.remove('opacity-100');
+                messageBox.classList.add('opacity-0');
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 3000); // Message disappears after 3 seconds
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Signup form submitted!');
+            // In a real application, you would send this data to a server
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                const messageBox = document.createElement('div');
+                messageBox.className = "fixed top-0 left-1/2 -translate-x-1/2 mt-4 px-6 py-3 bg-red-500 text-white rounded-lg shadow-lg z-50 transition-opacity duration-300 opacity-100";
+                messageBox.textContent = "Passwords do not match!";
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.classList.remove('opacity-100');
+                    messageBox.classList.add('opacity-0');
+                    messageBox.addEventListener('transitionend', () => messageBox.remove());
+                }, 3000);
+                return;
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.className = "fixed top-0 left-1/2 -translate-x-1/2 mt-4 px-6 py-3 bg-green-500 text-white rounded-lg shadow-lg z-50 transition-opacity duration-300 opacity-100";
+            messageBox.textContent = `Sign Up attempt for: ${email}`;
+            document.body.appendChild(messageBox);
+            setTimeout(() => {
+                messageBox.classList.remove('opacity-100');
+                messageBox.classList.add('opacity-0');
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
